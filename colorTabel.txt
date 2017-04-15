@@ -1,0 +1,6 @@
+#declare Red = rgb <1, 0, 0>
+#declare Green = rgb <0, 1, 0>
+#declare Blue = rgb <0, 0, 1>
+#declare Yellow = rgb <1,1,0>
+#declare Cyan = rgb <0, 1, 1>
+#declare Magenta = rgb <1, 0, 1>
