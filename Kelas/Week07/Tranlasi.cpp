@@ -21,25 +21,29 @@ void display(){
   //glTranslatef(-4.0,4.0,0.0);
   //glScalef(x,y,1);
   //glRotatef(80,0,0,1);
-  glColor3f(1,0,0);
-  glBegin(GL_POLYGON);
-  glVertex2f(-1.0,-1.0);
-  glVertex2f(1.0,-1.0);
-  glVertex2f(1.0,1.0);
-  glVertex2f(-1.0,1.0);
-  glEnd();
+  // glColor3f(1,0,0);
+  // glBegin(GL_POLYGON);
+  // glVertex2f(-1.0,-1.0);
+  // glVertex2f(1.0,-1.0);
+  // glVertex2f(1.0,1.0);
+  // glVertex2f(-1.0,1.0);
+  // glEnd();
 
-  glScalef(2,2,1);
-  glTranslatef(2.0,2,0.0);
-  glRotatef(45,0,0,1);
   glColor3f(0,0,1);
-  glBegin(GL_POLYGON);
-  glVertex2f(-1.0,-1.0);
-  glVertex2f(1.0,-1.0);
-  glVertex2f(1.0,1.0);
-  glVertex2f(-1.0,1.0);
+  glBegin(GL_POINTS);
+  glVertex2f(3.0,2.0);
   glEnd();
 
+	glColor3f(1,0,0);
+  glBegin(GL_POINTS);
+  glVertex2f(6.0,3.0);
+  glEnd();
+
+	glScalef(2,1.5,1);
+	glColor3f(0,1,0);
+  glBegin(GL_POINTS);
+  glVertex2f(3.0,2.0);
+  glEnd();
 	glFlush();
 }
 
