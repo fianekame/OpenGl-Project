@@ -6,22 +6,17 @@
 #endif
 
 float xPlayer,yPlayer;
-int pAtas,pBawah;
-int xnim,ynim;
-int xk,yk;
-int temp;
-int walk;
+int pAtas,pBawah,xnim,ynim,xk,yk;
+int temp,walk;
 int wall = 1,road = 0;
-int map [17][17];
+int map[17][17];
 
-void cetak(){
+void consoleText(){
   for (int i = 0; i < 17; i++){
     for (int j = 0; j < 17; j++){
       std::cout << map[i][j];
-    }
-      std::cout << std::endl;
-  }
-    std::cout << std::endl;
+    }std::cout << std::endl;
+  }std::cout << std::endl;
 }
 
 void changeTemp(){
@@ -34,18 +29,20 @@ void changeTemp(){
   }
 }
 
+void destroyer(int xk2, int yk2, int xk1, int yk1){
+  map[xk1][yk1] = road;
+  temp = map[xk2][yk2];
+  changeTemp();
+  walk--;
+}
+
 void makeWay(){
-  //xk+ bwah xk- atas yk+kanan yk-bawah
+  //xk+ bwah xk- atas yk+kanan yk-kiri
   int arah = (rand() % 4);
   switch (arah){
     case 0:
       if (xk+2 <= 15){
-        if (map[xk+2][yk] != map[xk][yk]){
-          map[xk+1][yk] = road;
-          temp = map[xk+2][yk];
-          changeTemp();
-          walk--;
-        }
+        if (map[xk+2][yk] != map[xk][yk]){destroyer(xk+2,yk,xk+1,yk);}
       }
       else{
         makeWay();
@@ -53,12 +50,7 @@ void makeWay(){
     break;
     case 1:
       if (xk-2 >= 0){
-        if (map[xk-2][yk] != map[xk][yk]){
-          map[xk-1][yk] = road;
-          temp = map[xk-2][yk];
-          changeTemp();
-          walk--;
-        }
+        if (map[xk-2][yk] != map[xk][yk]){destroyer(xk-2,yk,xk-1,yk);}
       }
       else{
         makeWay();
@@ -66,12 +58,7 @@ void makeWay(){
     break;
     case 2:
       if (yk+2 <= 15){
-        if (map[xk][yk+2] != map[xk][yk]){
-          map[xk][yk+1] = road;
-          temp = map[xk][yk+2];
-          changeTemp();
-          walk--;
-        }
+        if (map[xk][yk+2] != map[xk][yk]){destroyer(xk,yk+2,xk,yk+1);}
       }
       else{
         makeWay();
@@ -79,12 +66,7 @@ void makeWay(){
     break;
     case 3:
       if (yk-2 >= 0){
-        if (map[xk][yk-2] != map[xk][yk]){
-          map[xk][yk-1] = road;
-          temp = map[xk][yk-2];
-          changeTemp();
-          walk--;
-        }
+        if (map[xk][yk-2] != map[xk][yk]){destroyer(xk,yk-2,xk,yk-1);}
       }
       else {
         makeWay();
@@ -114,120 +96,67 @@ void fillMap(){
       }
     }
   }
-  cetak();
+  consoleText();
   while (walk != 0){
     xk = (rand() % 8+1)*2-1;
     yk = (rand() % 8+1)*2-1;
     makeWay();
   }
   placeDoor();
-  yPlayer=16;
   xPlayer=pBawah;
-  cetak();
+  yPlayer=16;
+  consoleText();
+}
+
+void makeBlock(char color,float arg1, float arg2, float arg3, float arg4) {
+  if (color=='R') {
+    glColor3f(1,0,0);
+  }else if (color=='G') {
+    glColor3f(0,1,0);
+  }else{
+    glColor3f(0,0,1);
+  }
+  glBegin(GL_POLYGON);
+    glVertex3f (arg1,arg2,0.0);
+    glVertex3f (arg3,arg2,0.0);
+    glVertex3f (arg3,arg4,0.0);
+    glVertex3f (arg1,arg4,0.0);
+  glEnd();
 }
 
 void Nim() {
-  glBegin(GL_POLYGON);
-  glColor3f(1,0,0);
-    glVertex3f (0.1+xnim,0.1+ynim,0.0);
-    glVertex3f (0.18+xnim,0.1+ynim, 0.0);
-    glVertex3f (0.18+xnim,0.9+ynim, 0.0);
-    glVertex3f (0.1+xnim,0.9+ynim, 0.0);
-  glEnd();
+  //angka satu
+  makeBlock('R',0.1+xnim,0.1+ynim,0.18+xnim,0.9+ynim);
 
-  glBegin(GL_POLYGON);
-  //glColor3f(0,1,1);
-    glVertex3f (0.21+xnim,0.1+ynim,0.0);
-    glVertex3f (0.3+xnim,0.1+ynim, 0.0);
-    glVertex3f (0.3+xnim,0.9+ynim, 0.0);
-    glVertex3f (0.21+xnim,0.9+ynim, 0.0);
-  glEnd();
+  //angka nol
+  makeBlock('R',0.21+xnim,0.1+ynim,0.3+xnim,0.9+ynim);
+  makeBlock('R',0.3+xnim,0.1+ynim,0.45+xnim,0.19+ynim);
+  makeBlock('R',0.45+xnim,0.1+ynim,0.54+xnim,0.9+ynim);
+  makeBlock('R',0.3+xnim,0.81+ynim,0.45+xnim,0.9+ynim);
 
-	glBegin(GL_POLYGON);
-    glVertex3f (0.3+xnim,0.1+ynim,0.0);
-    glVertex3f (0.45+xnim,0.1+ynim, 0.0);
-    glVertex3f (0.45+xnim,0.19+ynim, 0.0);
-    glVertex3f (0.3+xnim,0.19+ynim, 0.0);
-  glEnd();
-
-	glBegin(GL_POLYGON);
-    glVertex3f (0.45+xnim,0.1+ynim,0.0);
-    glVertex3f (0.54+xnim,0.1+ynim, 0.0);
-    glVertex3f (0.54+xnim,0.9+ynim, 0.0);
-    glVertex3f (0.45+xnim,0.9+ynim, 0.0);
-  glEnd();
-
-	glBegin(GL_POLYGON);
-		glVertex3f (0.3+xnim,0.81+ynim,0.0);
-		glVertex3f (0.45+xnim,0.81+ynim, 0.0);
-		glVertex3f (0.45+xnim,0.9+ynim, 0.0);
-		glVertex3f (0.3+xnim,0.9+ynim, 0.0);
-	glEnd();
-
-	glBegin(GL_POLYGON);
-  //glColor3f(1,1,0);
-		glVertex3f (0.57+xnim,0.1+ynim,0.0);
-		glVertex3f (0.66+xnim,0.1+ynim, 0.0);
-		glVertex3f (0.66+xnim,0.9+ynim, 0.0);
-		glVertex3f (0.57+xnim,0.9+ynim, 0.0);
-	glEnd();
-
-	glBegin(GL_POLYGON);
-		glVertex3f (0.57+xnim,0.1+ynim,0.0);
-		glVertex3f (0.82+xnim,0.1+ynim, 0.0);
-		glVertex3f (0.82+xnim,0.19+ynim, 0.0);
-		glVertex3f (0.57+xnim,0.19+ynim, 0.0);
-	glEnd();
-
-	glBegin(GL_POLYGON);
-    glVertex3f (0.82+xnim,0.1+ynim,0.0);
-    glVertex3f (0.91+xnim,0.1+ynim, 0.0);
-    glVertex3f (0.91+xnim,0.9+ynim, 0.0);
-    glVertex3f (0.82+xnim,0.9+ynim, 0.0);
-  glEnd();
-
-	glBegin(GL_POLYGON);
-		glVertex3f (0.66+xnim,0.81+ynim,0.0);
-		glVertex3f (0.91+xnim,0.81+ynim, 0.0);
-		glVertex3f (0.91+xnim,0.9+ynim, 0.0);
-		glVertex3f (0.66+xnim,0.9+ynim, 0.0);
-	glEnd();
-
-	glBegin(GL_POLYGON);
-		glVertex3f (0.66+xnim,0.46+ynim,0.0);
-		glVertex3f (0.91+xnim,0.46+ynim, 0.0);
-		glVertex3f (0.91+xnim,0.55+ynim, 0.0);
-		glVertex3f (0.66+xnim,0.55+ynim, 0.0);
-	glEnd();
+  //angka delapan
+  makeBlock('R',0.57+xnim,0.1+ynim,0.66+xnim,0.9+ynim);
+  makeBlock('R',0.57+xnim,0.1+ynim,0.82+xnim,0.19+ynim);
+  makeBlock('R',0.82+xnim,0.1+ynim,0.91+xnim,0.9+ynim);
+  makeBlock('R',0.66+xnim,0.81+ynim,0.91+xnim,0.9+ynim);
+  makeBlock('R',0.66+xnim,0.46+ynim,0.91+xnim,0.55+ynim);
 }
 
 void Player(){
-  glBegin(GL_POLYGON);
-    glColor3f(0,1,0);
-    glVertex3f (xPlayer,yPlayer,0.0);
-    glVertex3f (xPlayer+1,yPlayer, 0.0);
-    glVertex3f (xPlayer+1,yPlayer+1, 0.0);
-    glVertex3f (xPlayer,yPlayer+1, 0.0);
-  glEnd();
+  makeBlock('G',xPlayer,yPlayer,xPlayer+1,yPlayer+1);
 }
 
 void display(){
 	glClear(GL_COLOR_BUFFER_BIT);
-  Nim();
   for (int i = 0; i < 17; i++){
-      for (int j = 0; j < 17; j++){
-          if (map[i][j]==1)  {
-            glBegin(GL_POLYGON);
-            glColor3f(0,0,1);
-            glVertex3f (j,i,0.0);
-            glVertex3f (j+1,i, 0.0);
-            glVertex3f (j+1,i+1, 0.0);
-            glVertex3f (j,i+1, 0.0);
-            glEnd();
-          }
+    for (int j = 0; j < 17; j++){
+      if (map[i][j]==1){
+        makeBlock('B',j,i,j+1,i+1);
       }
+    }
   }
   Player();
+  Nim();
 	glFlush();
 }
 
@@ -238,17 +167,17 @@ void input(unsigned char key, int x, int y)
       xnim = (rand() % 8)*2+1;
       ynim = (rand() % 8)*2+1;
     }
-    if(key=='s' || key=='S'){
-      yPlayer-=0.1;
+    if(key=='w' || key=='W'){
+      yPlayer+=0.1;
     }
     if(key=='a' || key=='A'){
       xPlayer-=0.1;
     }
+    if(key=='s' || key=='S'){
+      yPlayer-=0.1;
+    }
     if(key=='d' || key=='D'){
       xPlayer+=0.1;
-    }
-    if(key=='w' || key=='W'){
-      yPlayer+=0.1;
     }
     display();
 }
@@ -268,7 +197,7 @@ int main(int argc, char* argv[]){
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(500,500);
 	//glutInitWindowPosition(100,100);
-	glutCreateWindow("Maze Demo II | Kruskal");
+	glutCreateWindow("Maze Demo II | Kruskal Algorithm");
 	glutDisplayFunc(display);
   glutKeyboardFunc(input);
   xnim = (rand() % 8)*2+1;

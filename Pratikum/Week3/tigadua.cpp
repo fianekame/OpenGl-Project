@@ -6,7 +6,7 @@
 #endif
 
 
-void snow(){
+void draw(){
     glBegin(GL_LINE_STRIP);
         glVertex3f(0.3,0.15,0.0);
         glVertex3f(3.0,0.15,0.0);
@@ -33,35 +33,13 @@ void display()
     glClear(GL_COLOR_BUFFER_BIT);
     glColor3f(0.0,0.0,1.0);
 
-    snow();
-    glScalef(1,-1,1);
-    snow();
+    for (int i = 0; i <= 300; i+=60) {
+      glRotatef(i,0,0,1);
+      draw();
+      glScalef(1,-1,1);
+      draw();
+    }
 
-    glRotatef(60,0,0,1);
-    snow();
-    glScalef(1,-1,1);
-    snow();
-
-    glRotatef(120,0,0,1);
-    snow();
-    glScalef(1,-1,1);
-    snow();
-
-    glRotatef(180,0,0,1);
-    snow();
-    glScalef(1,-1,1);
-    snow();
-
-    glRotatef(240,0,0,1);
-    snow();
-    glScalef(1,-1,1);
-    snow();
-
-    glRotatef(300,0,0,1);
-    snow();
-    glScalef(1,-1,1);
-    snow();
-    
     glFlush();
 }
 

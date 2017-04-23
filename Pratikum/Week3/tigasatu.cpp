@@ -8,11 +8,9 @@ bool color = true;
 void display(){
 	glClear(GL_COLOR_BUFFER_BIT);
 	glPointSize(4);
-	// glColor3f(0.0,0.0,1.0);
-	// glRecti(0.0, 0.0, 2.0, 2.0);
   for (int i = 0; i < 8 ; i++) {
     for (int j = 0; j < 8; j++) {
-        if(color){ // if i + j is even
+        if(color){
           glColor3f(1.0,1.0,0.0);
 					color=!color;
 				}else{

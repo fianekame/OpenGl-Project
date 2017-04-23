@@ -1,0 +1,18 @@
+Soal
+1. Kenapa posisi x dan y player memakai tipe data float?
+2. Kenapa random nim menggunakan %5 dan harus dikali 2 + 1
+3. Rx dan ry digunakan buat apa? Tunjukan
+4. Tunjukkan glutortho2d kenapa menggunakan glutortho2d seperti itu?
+5. Jelaskan cara kerja algoritmamu unutk membuat maze (mengisi arraynya tuh bukan gambarnya)
+6. Bagaimana cara membuat pintu atas dan pintu bawah
+7. Kenapa ada kondisi i==9 dan j==9 ?
+8. Untuk apa ada pengecekan rx+2<=9 atau ry+2<=2 pada waydirection
+9. jelaskan dari int direct=(rand()2+1)
+10. Tunjukkan pembuatan nim. dan jelaskan random Nim
+11. apa yang dilakukan setelah maze pada array terisi penuh?
+12. darimana Starting point algoritmu mu?
+13. tunjukkan fungsi keyboard c dan apa yang dilakukan
+14. untuk apa ada variable rx=j dan rx=i
+15. Tunjukkan letak menggerakkan playermu
+16. Pahami bener bener cara kerja algoritma dari void maze sampai void makeway. atau nggak kamu langsung
+juga dipratekkan ke excel yang dari aku. GoodLuck Bos!!

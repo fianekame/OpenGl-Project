@@ -9,13 +9,35 @@ void display(){
 	glClear(GL_COLOR_BUFFER_BIT);
 	glPointSize(4);
 
-
+//Penambahan Beberopaa Brnacnh DIsini
 	glBegin(GL_LINE_STRIP);
 	glVertex2f(-1.0,-1.0);
 	glVertex2f(1.0,-1.0);
 	glVertex2f(0.0,1.0);
 	glEnd();
 
+
+//gak glutInitDisplayMode
+glBegin(GL_LINE_STRIP);
+glVertex2f(-1.0,-1.0);
+glVertex2f(1.0,-1.0);
+glVertex2f(0.0,1.0);
+glEnd();glBegin(GL_LINE_STRIP);
+glVertex2f(-1.0,-1.0);
+glVertex2f(1.0,-1.0);
+glVertex2f(0.0,1.0);
+glEnd();
+
+glBegin(GL_LINE_STRIP);
+glVertex2f(-1.0,-1.0);
+glVertex2f(1.0,-1.0);
+glVertex2f(0.0,1.0);
+glEnd();
+glBegin(GL_LINE_STRIP);
+glVertex2f(-1.0,-1.0);
+glVertex2f(1.0,-1.0);
+glVertex2f(0.0,1.0);
+glEnd();
 	glFlush();
 }
 
